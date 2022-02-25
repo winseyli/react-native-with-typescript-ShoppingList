@@ -4,11 +4,15 @@ import Header from './src/components/Header';
 import AddItem, {IItem} from './src/components/AddItem'; /* import AddItem and interface*/
 
 const App = () => {
+  const [shoppingList, setShoppingList] = useState<IItem[]>([]); // set the type of what the hook expects to be an array of IItems.
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Shopping List" />
       <View style={styles.contentWrapper}>
-        <AddItem />
+        <AddItem
+          setShoppingList={setShoppingList}
+          shoppingList={shoppingList}
+        />
       </View>
     </SafeAreaView>
   );
