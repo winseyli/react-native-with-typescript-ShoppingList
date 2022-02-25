@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
 import Header from './src/components/Header';
 import AddItem, {IItem} from './src/components/AddItem'; /* import AddItem and interface*/
+import Item from './src/components/Item';
 
 const App = () => {
   const [shoppingList, setShoppingList] = useState<IItem[]>([]); // set the type of what the hook expects to be an array of IItems.
@@ -12,6 +13,13 @@ const App = () => {
         <AddItem
           setShoppingList={setShoppingList}
           shoppingList={shoppingList}
+        />
+        <FlatList
+          data={shoppingList}
+          keyExtractor={(item, index) => `${item.item}-${index}`}
+          renderItem={({item}) => (
+            <Item item={item.item} quantity={item.quantity} />
+          )}
         />
       </View>
     </SafeAreaView>
